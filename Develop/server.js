@@ -12,8 +12,10 @@ app.use(express.json());
 
 app.use(express.static('public'));
 
+app.set('view engine', 'ejs');
+
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '/public/index.html'));
+  res.sendFile(path.join(__dirname, '/public/notes.html'));
 });
 
 app.get('/api/notes', (req, res) => {
@@ -52,10 +54,10 @@ app.post('/api/notes', (req, res) => {
 
 app.delete('/api/notes/:id', (req, res) => {
   
-    console.info(`${req.method} request received to delete notes`);
+    console.info(`${req.method.id} request received to delete notes`);
   
     // Destructuring assignment for the items in req.body
-    const { noteTitle, noteText } = req.body;
+    const deleteNote = req.body;
   
     // If all the required properties are present
     if (noteTitle && noteText) {
